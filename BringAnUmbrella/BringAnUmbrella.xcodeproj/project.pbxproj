@@ -17,6 +17,7 @@
 		AAF7FAE21B41BF96008E7D6F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF7FAE01B41BF96008E7D6F /* LaunchScreen.xib */; };
 		AAF7FAEE1B41BF96008E7D6F /* BringAnUmbrellaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF7FAED1B41BF96008E7D6F /* BringAnUmbrellaTests.m */; };
 		AAF7FB0B1B41F286008E7D6F /* WeatherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF7FB0A1B41F286008E7D6F /* WeatherAPI.m */; };
+		AAF7FB111B41F448008E7D6F /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF7FB101B41F448008E7D6F /* Weather.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		AAF7FAED1B41BF96008E7D6F /* BringAnUmbrellaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BringAnUmbrellaTests.m; sourceTree = "<group>"; };
 		AAF7FB091B41F286008E7D6F /* WeatherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherAPI.h; sourceTree = "<group>"; };
 		AAF7FB0A1B41F286008E7D6F /* WeatherAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherAPI.m; sourceTree = "<group>"; };
+		AAF7FB0F1B41F448008E7D6F /* Weather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weather.h; sourceTree = "<group>"; };
+		AAF7FB101B41F448008E7D6F /* Weather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weather.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 				AAF7FAD91B41BF96008E7D6F /* ViewController.m */,
 				AAF7FB091B41F286008E7D6F /* WeatherAPI.h */,
 				AAF7FB0A1B41F286008E7D6F /* WeatherAPI.m */,
+				AAF7FB0F1B41F448008E7D6F /* Weather.h */,
+				AAF7FB101B41F448008E7D6F /* Weather.m */,
 				AAF7FADB1B41BF96008E7D6F /* Main.storyboard */,
 				AAF7FADE1B41BF96008E7D6F /* Images.xcassets */,
 				AAF7FAE01B41BF96008E7D6F /* LaunchScreen.xib */,
@@ -233,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF7FB111B41F448008E7D6F /* Weather.m in Sources */,
 				AAF7FB0B1B41F286008E7D6F /* WeatherAPI.m in Sources */,
 				AAF7FADA1B41BF96008E7D6F /* ViewController.m in Sources */,
 				853FA3FE1B41C67400C5A527 /* UserLocation.m in Sources */,
