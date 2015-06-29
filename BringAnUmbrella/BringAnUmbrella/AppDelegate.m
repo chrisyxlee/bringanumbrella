@@ -7,17 +7,20 @@
 //
 
 #import "AppDelegate.h"
+#import "UserLocation.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) UserLocation *location;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    _location = [[UserLocation alloc] init];
     return YES;
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
