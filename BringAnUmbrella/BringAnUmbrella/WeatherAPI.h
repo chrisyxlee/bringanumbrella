@@ -11,6 +11,6 @@
 
 @interface WeatherAPI : NSObject
 
-+ currentWeatherURLForLocation:(UserLocation *)location;
++ (NSURL *)currentWeatherURLForLocation:(UserLocation *)location;
 
 @end
