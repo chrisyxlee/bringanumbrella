@@ -20,14 +20,11 @@ NSString * const APIKey = @"3ae7ed578eb03aa2b78f2329bd28c6f5";
 @implementation WeatherAPI
 
 + (NSURL *)currentWeatherURLForLocation:(UserLocation *)location {
-    NSInteger longitude = location.longitude;
-    NSInteger latitude = location.latitude;
+    NSString *longitude = [NSString stringWithFormat:@"%d",(int)location.longitude];
+    NSString *latitude = [NSString stringWithFormat:@"%d",(int)location.latitude];
     
-    NSNumber *lon = [NSNumber numberWithInteger:longitude];
-    NSNumber *lat = [NSNumber numberWithInteger:latitude];
-    
-    NSDictionary *params = @{ @"lon":lon,
-                              @"lat":lat };
+    NSDictionary *params = @{ @"lon":longitude,
+                              @"lat":latitude };
     
     NSURL *currentWeatherURL = [self weatherURLWithWeatherType:WEATHER
                                                     parameters:params];
