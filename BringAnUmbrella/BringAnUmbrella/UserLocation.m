@@ -10,26 +10,38 @@
 
 @implementation UserLocation
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+- (instancetype)init
 {
-    CLLocation *location = [locations lastObject];
-    NSDate *eventDate = location.timestamp;
+    self = [super init];
+    if (self)
+    {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        {
+            [_locationManager requestAlwaysAuthorization];
+        }
+        [_locationManager startUpdatingLocation];
+    }
+    return self;
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations
+{
+    self.currentLocation = [locations lastObject];
+    NSDate *eventDate = self.currentLocation.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     if (fabs(howRecent) < 30.0)
     {
-        self.longitude = location.coordinate.longitude;
-        self.latitude = location.coordinate.latitude;
+        self.longitude = self.currentLocation.coordinate.longitude;
+        self.latitude = self.currentLocation.coordinate.latitude;
+        NSLog(@"Longitude: %.2f, Latitude: %.2f", self.longitude, self.latitude);
     }
 }
 
-- (void)startSignificantChangeUpdates
-{
-    if (self.locationManager == nil)
-    {
-        self.locationManager = [[CLLocationManager alloc] init];
-    }
-    self.locationManager.delegate = self;
-    [self.locationManager startMonitoringSignificantLocationChanges];
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"Error in finding location.");
 }
 
 @end

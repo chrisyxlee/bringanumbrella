@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 @interface UserLocation : NSObject <CLLocationManagerDelegate>
 
-@property (nonatomic) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic) CLLocation *currentLocation;
 @property (nonatomic) float longitude;
 @property (nonatomic) float latitude;
-
-- (void)startSignificantChangeUpdates;
 
 @end
