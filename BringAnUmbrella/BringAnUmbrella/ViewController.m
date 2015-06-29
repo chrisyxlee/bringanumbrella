@@ -22,16 +22,17 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     
     //STEP 1 Construct Panels
-    MYIntroductionPanel *panel = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"SampleImage1"] title:@"Bring an Umbrella" description:@"Ready to never have to worrying about remembering your umbrella an again?" ];
+    MYIntroductionPanel *panel = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"Umbrella_icon"] title:@"Bring an Umbrella" description:@"Ready to never have to worrying about remembering your umbrella an again?" ];
     
     //You may also add in a title for each panel
-    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"SampleImage2"] title:@"Enable GPS" description:@"If you don't let Bring an Umbrella Access GPS, we won't be able to predict rain in your region!"];
+    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"Umbrella_icon"] title:@"Enable GPS" description:@"If you don't let Bring an Umbrella Access GPS, we won't be able to predict rain in your region!"];
     
-    MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"SampleImage2"] title:@"Enable Notifications" description:@"Its literally all this app does"];
+    MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"Umbrella_icon"] title:@"Enable Notifications" description:@"Its literally all this app does"];
     
-    MYIntroductionPanel *panel4 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"SampleImage2"] title:@"We've got you covered" description:@"Great! From now on you'll get a notification whenever percipitation is coming your way"];
+    MYIntroductionPanel *panel4 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"Umbrella_icon"] title:@"We've got you covered" description:@"Great! From now on you'll get a notification whenever percipitation is coming your way"];
     
     //STEP 2 Create IntroductionView
     /*A standard version*/
