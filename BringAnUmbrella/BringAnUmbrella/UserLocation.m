@@ -30,14 +30,12 @@
      didUpdateLocations:(NSArray *)locations
 {
     self.currentLocation = [locations lastObject];
-    NSDate *eventDate = self.currentLocation.timestamp;
-    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    if (fabs(howRecent) < 30.0)
-    {
-        self.longitude = self.currentLocation.coordinate.longitude;
-        self.latitude = self.currentLocation.coordinate.latitude;
-        NSLog(@"Longitude: %.2f, Latitude: %.2f", self.longitude, self.latitude);
-    }
+    //NSDate *eventDate = self.currentLocation.timestamp;
+    //NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    self.longitude = self.currentLocation.coordinate.longitude;
+    self.latitude = self.currentLocation.coordinate.latitude;
+    NSLog(@"Longitude: %.2f, Latitude: %.2f", self.longitude, self.latitude);
+    [manager stopUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
