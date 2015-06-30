@@ -82,6 +82,7 @@ NSString * const APIKey = @"3ae7ed578eb03aa2b78f2329bd28c6f5";
 + (NSDateFormatter *)dateFormatter {
     static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
+    
     dispatch_once(&onceToken, ^{
         formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
