@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "Forecast.h"
+#import "ForecastStore.h"
+#import "UserLocation.h"
 
 
 @interface ViewController ()
@@ -19,6 +22,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    ForecastStore *forecastStore = [[ForecastStore alloc] init];
+    Forecast *forecast = [forecastStore forecastForTodayAt:self.location];
+    BOOL willRain = [forecast tomorrowWillRain];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

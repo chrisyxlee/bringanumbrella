@@ -23,12 +23,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    _location = [[UserLocation alloc] init];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
+    [self.viewController setLocation:self.location];
     [self.window makeKeyAndVisible];
-    _location = [[UserLocation alloc] init];
+    
     
     return YES;
     
@@ -36,20 +39,32 @@
 
 - (void)setNotification
 {
-    NSDate *now = [NSDate date];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:now];
-    [components setHour:6];
-    NSDate *tomorrow6am = [calendar dateFromComponents:components];
+    ForecastStore *forecastStore = [[ForecastStore alloc] init];
+    Forecast *forecast = [forecastStore forecastForTodayAt:self.location];
+    BOOL willRain = [forecast tomorrowWillRain];
     
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    [comps setDay:1];
-    [comps setMonth:1];
-    [comps setYear:2013];
-    [comps setHour:10];
-    [comps setMinute:10];
-    [comps setSecond:10];
-    localNotif.fireDate = [[NSCalendar currentCalendar] dateFromComponents:comps]
+    NSDate *now = [NSDate date]; //today's date
+    //NSDate *newDate = [now dateByAddingTimeInterval:60*60*24]; //tomorrow's date
+    NSDate *newDate = now;
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:newDate];
+//    [components setHour:11];
+//    [components setMinute:51];
+//    [components setSecond:0];
+//    [components setTimeZone:[NSTimeZone defaultTimeZone]];
+    NSDate *someDate = [components date];
+    someDate = [someDate dateByAddingTimeInterval:60];
+    
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    [localNotification setFireDate: [[NSCalendar currentCalendar] dateFromComponents:components]];
+    [localNotification setTimeZone: [NSTimeZone defaultTimeZone]];
+    
+    if (!willRain) [localNotification setAlertBody:@"It's sunny today. And always will be!"];
+    else [localNotification setAlertBody:@"Bring your umbrella!"];
+    [localNotification setRepeatInterval: NSCalendarUnitMinute];
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "MYIntroductionView.h"
+@class UserLocation;
 
 @interface ViewController : UIViewController <MYIntroductionDelegate>
+
+@property (nonatomic, strong) UserLocation *location;
 
 @end
 
