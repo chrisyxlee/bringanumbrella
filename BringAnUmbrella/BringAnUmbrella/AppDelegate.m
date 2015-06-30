@@ -34,6 +34,24 @@
     
 }
 
+- (void)setNotification
+{
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:now];
+    [components setHour:6];
+    NSDate *tomorrow6am = [calendar dateFromComponents:components];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setDay:1];
+    [comps setMonth:1];
+    [comps setYear:2013];
+    [comps setHour:10];
+    [comps setMinute:10];
+    [comps setSecond:10];
+    localNotif.fireDate = [[NSCalendar currentCalendar] dateFromComponents:comps]
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
