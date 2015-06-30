@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370F7A051B41EBC800B94064 /* MYIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F7A021B41EBC700B94064 /* MYIntroductionView.m */; };
+		370F7A061B41EBC800B94064 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F7A041B41EBC700B94064 /* MYIntroductionPanel.m */; };
+		370F7A0A1B41ECE600B94064 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 370F7A091B41ECE600B94064 /* ViewController.xib */; };
 		853FA3FB1B41C5B100C5A527 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 853FA3FA1B41C5B100C5A527 /* CoreLocation.framework */; };
 		853FA3FE1B41C67400C5A527 /* UserLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 853FA3FD1B41C67400C5A527 /* UserLocation.m */; };
 		AAF7FAD41B41BF96008E7D6F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF7FAD31B41BF96008E7D6F /* main.m */; };
@@ -29,6 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		370F7A011B41EBC700B94064 /* MYIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionView.h; sourceTree = "<group>"; };
+		370F7A021B41EBC700B94064 /* MYIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionView.m; sourceTree = "<group>"; };
+		370F7A031B41EBC700B94064 /* MYIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionPanel.h; sourceTree = "<group>"; };
+		370F7A041B41EBC700B94064 /* MYIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionPanel.m; sourceTree = "<group>"; };
+		370F7A091B41ECE600B94064 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		853FA3FA1B41C5B100C5A527 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		853FA3FC1B41C67400C5A527 /* UserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocation.h; sourceTree = "<group>"; };
 		853FA3FD1B41C67400C5A527 /* UserLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocation.m; sourceTree = "<group>"; };
@@ -66,6 +74,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		370F7A081B41EBDB00B94064 /* MYIntroductionView */ = {
+			isa = PBXGroup;
+			children = (
+				370F7A011B41EBC700B94064 /* MYIntroductionView.h */,
+				370F7A021B41EBC700B94064 /* MYIntroductionView.m */,
+				370F7A031B41EBC700B94064 /* MYIntroductionPanel.h */,
+				370F7A041B41EBC700B94064 /* MYIntroductionPanel.m */,
+			);
+			name = MYIntroductionView;
+			sourceTree = "<group>";
+		};
 		AAF7FAC51B41BF96008E7D6F = {
 			isa = PBXGroup;
 			children = (
@@ -94,7 +113,9 @@
 				853FA3FD1B41C67400C5A527 /* UserLocation.m */,
 				AAF7FAD81B41BF96008E7D6F /* ViewController.h */,
 				AAF7FAD91B41BF96008E7D6F /* ViewController.m */,
+				370F7A091B41ECE600B94064 /* ViewController.xib */,
 				AAF7FADB1B41BF96008E7D6F /* Main.storyboard */,
+				370F7A081B41EBDB00B94064 /* MYIntroductionView */,
 				AAF7FADE1B41BF96008E7D6F /* Images.xcassets */,
 				AAF7FAE01B41BF96008E7D6F /* LaunchScreen.xib */,
 				AAF7FAD11B41BF96008E7D6F /* Supporting Files */,
@@ -210,6 +231,7 @@
 			files = (
 				AAF7FADD1B41BF96008E7D6F /* Main.storyboard in Resources */,
 				AAF7FAE21B41BF96008E7D6F /* LaunchScreen.xib in Resources */,
+				370F7A0A1B41ECE600B94064 /* ViewController.xib in Resources */,
 				AAF7FADF1B41BF96008E7D6F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,10 +250,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				370F7A061B41EBC800B94064 /* MYIntroductionPanel.m in Sources */,
 				AAF7FADA1B41BF96008E7D6F /* ViewController.m in Sources */,
 				853FA3FE1B41C67400C5A527 /* UserLocation.m in Sources */,
 				AAF7FAD71B41BF96008E7D6F /* AppDelegate.m in Sources */,
 				AAF7FAD41B41BF96008E7D6F /* main.m in Sources */,
+				370F7A051B41EBC800B94064 /* MYIntroductionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
