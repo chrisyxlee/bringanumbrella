@@ -73,12 +73,12 @@
                             
                             NSLog(@"count: %lu",(unsigned long)forecast.weatherArray.count);
                             
+                            //getting time for 6am next morning
                             NSDate *now = [NSDate date];
                             NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
                             now = [now dateByAddingTimeInterval:timeZone.secondsFromGMT];
-                            NSLog(@"now: %@",now);
                             
-                            NSDateComponents* tomorrowComponents = [NSDateComponents new] ;
+                            NSDateComponents* tomorrowComponents = [NSDateComponents new];
                             tomorrowComponents.day = 1 ;
                             NSCalendar* calendar = [NSCalendar currentCalendar] ;
                             NSDate* tomorrow = [calendar dateByAddingComponents:tomorrowComponents toDate:now options:0] ;
@@ -86,12 +86,12 @@
                             NSDateComponents* tomorrowAt6AMComponents = [calendar components:(NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay) fromDate:tomorrow] ;
                             [tomorrowAt6AMComponents setHour:6];
                             NSDate* tomorrowAt6AM = [calendar dateFromComponents:tomorrowAt6AMComponents];
-
-                            NSLog(@"%@",tomorrowAt6AM);
+                            tomorrowAt6AM = [tomorrowAt6AM dateByAddingTimeInterval:timeZone.secondsFromGMT]; //time zone fix
 
                             for (int i = 0; i < forecast.weatherArray.count; i++) {
                                 Weather *weather = forecast.weatherArray[i];
-                                if ([weather.date timeIntervalSinceDate:now] > (20 * 60 * 60)) {
+                                int seconds = [weather.date timeIntervalSinceDate:tomorrowAt6AM];
+                                if (seconds > (20 * 60 * 60) || seconds < 0) {
                                     [forecast.weatherArray removeObjectIdenticalTo:weather];
                                 } else NSLog(@"Rain: %f, Cloud: %ld, Humidity: %f, Temperature: %f, Date: %@",
                                              weather.rain,weather.clouds,weather.humidity,weather.temperature, weather.date);
