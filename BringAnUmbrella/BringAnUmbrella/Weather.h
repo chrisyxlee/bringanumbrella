@@ -11,19 +11,19 @@
 @interface Weather : NSObject
 
 @property (nonatomic, copy) NSString *type;
-@property (nonatomic) NSInteger rain;           //in millimeters
-@property (nonatomic) CGFloat temperature;
-@property (nonatomic) NSInteger minTemp;
-@property (nonatomic) NSInteger maxTemp;
-@property (nonatomic) NSInteger clouds;         //percentage out of 100
-@property (nonatomic) NSInteger humidity;       //percentage out of 100
+@property (nonatomic) float rain;           //in millimeters
+@property (nonatomic) float temperature;
+@property (nonatomic) float minTemp;
+@property (nonatomic) float maxTemp;
+@property (nonatomic) NSInteger clouds;     //percentage out of 100
+@property (nonatomic) float humidity;       //percentage out of 100
 
 - (instancetype)initWithType:(NSString *)type
-                 temperature:(CGFloat)temp
-                 minimumTemp:(NSInteger)minTemp
-                 maximumTemp:(NSInteger)maxTemp
-                amountOfRain:(NSInteger)rain
-                    humidity:(NSInteger)humidity
+                 temperature:(float)temp
+                 minimumTemp:(float)minTemp
+                 maximumTemp:(float)maxTemp
+                amountOfRain:(float)rain
+                    humidity:(float)humidity
                       clouds:(NSInteger)clouds NS_DESIGNATED_INITIALIZER;
 
 @end

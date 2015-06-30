@@ -12,11 +12,11 @@
 
 //MARK: initalizers
 - (instancetype)initWithType:(NSString *)type
-                 temperature:(CGFloat)temp
-                 minimumTemp:(NSInteger)minTemp
-                 maximumTemp:(NSInteger)maxTemp
-                amountOfRain:(NSInteger)rain
-                    humidity:(NSInteger)humidity
+                 temperature:(float)temp
+                 minimumTemp:(float)minTemp
+                 maximumTemp:(float)maxTemp
+                amountOfRain:(float)rain
+                    humidity:(float)humidity
                       clouds:(NSInteger)clouds {
     self = [super init];
     if (self) {
