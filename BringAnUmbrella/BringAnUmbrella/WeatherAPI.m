@@ -33,8 +33,8 @@ NSString * const APIKey = @"3ae7ed578eb03aa2b78f2329bd28c6f5";
 }
 
 + (NSURL *)fiveDayWeatherURLForLocation:(UserLocation *)location {
-    NSString *longitude = [NSString stringWithFormat:@"%d",(int)location.longitude];
-    NSString *latitude = [NSString stringWithFormat:@"%d",(int)location.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f",location.longitude];
+    NSString *latitude = [NSString stringWithFormat:@"%f",location.latitude];
     
     NSDictionary *params = @{ @"lon":longitude,
                               @"lat":latitude };
