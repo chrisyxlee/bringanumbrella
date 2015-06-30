@@ -12,6 +12,7 @@
 
 @interface ForecastStore : NSObject
 
-- (Forecast *)getForecastFromFiveDayForecastFetchWithLocation:(UserLocation *)location;
+- (Forecast *)forecastFromFiveDayForecastAt:(UserLocation *)location;
+- (Forecast *)forecastForTodayAt:(UserLocation *)location;
 
 @end

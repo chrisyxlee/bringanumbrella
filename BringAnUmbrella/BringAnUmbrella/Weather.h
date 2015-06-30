@@ -17,6 +17,7 @@
 @property (nonatomic) float maxTemp;
 @property (nonatomic) NSInteger clouds;     //percentage out of 100
 @property (nonatomic) float humidity;       //percentage out of 100
+@property (nonatomic, strong) NSDate *date;
 
 - (instancetype)initWithType:(NSString *)type
                  temperature:(float)temp
@@ -24,6 +25,7 @@
                  maximumTemp:(float)maxTemp
                 amountOfRain:(float)rain
                     humidity:(float)humidity
-                      clouds:(NSInteger)clouds NS_DESIGNATED_INITIALIZER;
+                      clouds:(NSInteger)clouds
+                        date:(NSDate *)date NS_DESIGNATED_INITIALIZER;
 
 @end

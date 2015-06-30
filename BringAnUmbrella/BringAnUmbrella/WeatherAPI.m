@@ -60,6 +60,8 @@ NSString * const APIKey = @"3ae7ed578eb03aa2b78f2329bd28c6f5";
             float rain = [weather[@"rain"][@"3h"] floatValue];
             float humidity = [weather[@"main"][@"humidity"] floatValue];
             NSInteger clouds = [weather[@"clouds"][@"all"] intValue];
+            NSDateFormatter *formatter = [WeatherAPI dateFormatter];
+            NSDate *date = [formatter dateFromString:weather[@"dt_txt"]];
             
             Weather *weather = [[Weather alloc] initWithType:type
                                                  temperature:temp
@@ -67,13 +69,25 @@ NSString * const APIKey = @"3ae7ed578eb03aa2b78f2329bd28c6f5";
                                                  maximumTemp:maxTemp
                                                 amountOfRain:rain
                                                     humidity:humidity
-                                                      clouds:clouds];
+                                                      clouds:clouds
+                                                        date:date];
             [forecast addObject:weather];
         }
     } else NSLog(@"Failed to parse JSON forecast data. Error: %@", parseError.localizedDescription);
     
     Forecast *weatherForecast = [[Forecast alloc] initWithForecast:forecast];
     return weatherForecast;
+}
+
++ (NSDateFormatter *)dateFormatter {
+    static NSDateFormatter *formatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    });
+    
+    return formatter;
 }
 
 //private

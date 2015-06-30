@@ -17,7 +17,8 @@
                  maximumTemp:(float)maxTemp
                 amountOfRain:(float)rain
                     humidity:(float)humidity
-                      clouds:(NSInteger)clouds {
+                      clouds:(NSInteger)clouds
+                        date:(NSDate *)date {
     self = [super init];
     if (self) {
         _type = type;
@@ -27,6 +28,7 @@
         _rain = rain;
         _clouds = clouds;
         _humidity = humidity;
+        _date = date;
     }
     return self;
 }

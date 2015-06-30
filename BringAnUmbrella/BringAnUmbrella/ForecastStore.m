@@ -29,7 +29,7 @@
     return self;
 }
 
-- (Forecast *)getForecastFromFiveDayForecastFetchWithLocation:(UserLocation *)location {
+- (Forecast *)forecastFromFiveDayForecastAt:(UserLocation *)location {
     NSURL *fiveDayURL = [WeatherAPI fiveDayWeatherURLForLocation:location];
     
     __block Forecast *forecast;
@@ -55,6 +55,54 @@
                         }];
     [task resume];
     return forecast;
+}
+
+- (Forecast *)forecastForTodayAt:(UserLocation *)location {
+    NSURL *fiveDayURL = [WeatherAPI fiveDayWeatherURLForLocation:location];
+    
+    __block Forecast *forecast;
+    NSURLRequest *request = [NSURLRequest requestWithURL:fiveDayURL];
+    NSLog(@"%@",fiveDayURL);
+    NSURLSessionDataTask *task =
+    [self.session dataTaskWithRequest:request
+                    completionHandler:^(NSData *data,
+                                        NSURLResponse *response,
+                                        NSError *error) {
+                        if (data) {
+                            forecast = [WeatherAPI forecastFromJSONData:data];
+                            
+                            NSLog(@"count: %lu",(unsigned long)forecast.weatherArray.count);
+                            
+                            NSDate *now = [NSDate date];
+                            NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
+                            now = [now dateByAddingTimeInterval:timeZone.secondsFromGMT];
+                            NSLog(@"now: %@",now);
+                            
+                            NSDateComponents* tomorrowComponents = [NSDateComponents new] ;
+                            tomorrowComponents.day = 1 ;
+                            NSCalendar* calendar = [NSCalendar currentCalendar] ;
+                            NSDate* tomorrow = [calendar dateByAddingComponents:tomorrowComponents toDate:now options:0] ;
+                            
+                            NSDateComponents* tomorrowAt6AMComponents = [calendar components:(NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay) fromDate:tomorrow] ;
+                            [tomorrowAt6AMComponents setHour:6];
+                            NSDate* tomorrowAt6AM = [calendar dateFromComponents:tomorrowAt6AMComponents];
+
+                            NSLog(@"%@",tomorrowAt6AM);
+
+                            for (int i = 0; i < forecast.weatherArray.count; i++) {
+                                Weather *weather = forecast.weatherArray[i];
+                                if ([weather.date timeIntervalSinceDate:now] > (20 * 60 * 60)) {
+                                    [forecast.weatherArray removeObjectIdenticalTo:weather];
+                                } else NSLog(@"Rain: %f, Cloud: %ld, Humidity: %f, Temperature: %f, Date: %@",
+                                             weather.rain,weather.clouds,weather.humidity,weather.temperature, weather.date);
+
+                            }
+                            NSLog(@"%lu weathers",[forecast.weatherArray count]);
+                        } else NSLog(@"Failed to fetch data. Error: %@", error.localizedDescription);
+                    }];
+    [task resume];
+    return forecast;
+
 }
 
 @end
