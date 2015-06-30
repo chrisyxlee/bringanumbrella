@@ -13,5 +13,6 @@
 @property (nonatomic, strong) NSMutableArray *weatherArray;
 
 - (instancetype)initWithForecast:(NSArray *)forecast NS_DESIGNATED_INITIALIZER;
+- (BOOL)tomorrowWillRain;
 
 @end
