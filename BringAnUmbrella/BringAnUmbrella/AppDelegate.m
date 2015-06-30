@@ -23,13 +23,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    _location = [[UserLocation alloc] init];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
+    self.viewController.location = self.location;
     [self.window makeKeyAndVisible];
-    
-    _location = [[UserLocation alloc] init];
     
     return YES;
     
@@ -44,8 +45,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    ForecastStore *store = [[ForecastStore alloc] init];
-    Forecast *forecast = [store forecastForTodayAt:_location];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

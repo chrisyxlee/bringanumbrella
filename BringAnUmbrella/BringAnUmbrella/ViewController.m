@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "ForecastStore.h"
+#import "Forecast.h"
+#import "UserLocation.h"
 
 
 @interface ViewController ()
@@ -19,6 +22,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -58,13 +62,23 @@
     [introductionView.SkipButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     
-    
-    
     //Set delegate to self for callbacks (optional)
     introductionView.delegate = self;
     
     //STEP 3: Show introduction view
     [introductionView showInView:self.view animateDuration:0.0];
+    
+    //STEP 4: Determine homescreen forecast
+    ForecastStore *forecastStore = [[ForecastStore alloc] init];
+    Forecast *forecast = [forecastStore forecastForTodayAt:self.location];
+//    NSString *forecast
+    NSLog(@"forecast:  %d",[forecast tomorrowWillRain]);
+    if ([forecast tomorrowWillRain]) {
+        self.imageView.image = [UIImage imageNamed:@"rain"];
+    } else {
+        NSLog(@"ASDHGAKGJLAKWJEGAKLJAF");
+        self.imageView.image = [UIImage imageNamed:@"sun"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,5 +104,6 @@
 -(void)introductionDidChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
     NSLog(@"%@ \nPanelIndex: %d", panel.Description, panelIndex);
 }
+
 
 @end

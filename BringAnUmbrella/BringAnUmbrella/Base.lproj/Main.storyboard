@@ -13,13 +13,29 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lh9-dg-h0V">
+                                <rect key="frame" x="0.0" y="1" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" secondItem="Lh9-dg-h0V" secondAttribute="height" id="7iE-cu-AdT"/>
+                            <constraint firstAttribute="centerY" secondItem="Lh9-dg-h0V" secondAttribute="centerY" constant="-1" id="EKW-cp-qSe"/>
+                            <constraint firstAttribute="centerX" secondItem="Lh9-dg-h0V" secondAttribute="centerX" id="HHs-UX-OuJ"/>
+                            <constraint firstAttribute="width" secondItem="Lh9-dg-h0V" secondAttribute="width" id="scX-ri-NeG"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="imageView" destination="Lh9-dg-h0V" id="FOO-Ce-dB3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="253" y="247"/>
         </scene>
     </scenes>
 </document>
