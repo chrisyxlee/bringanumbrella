@@ -2,7 +2,11 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">2048</int>
+<<<<<<< HEAD
 		<string key="IBDocument.SystemVersion">14D2134</string>
+=======
+		<string key="IBDocument.SystemVersion">14D136</string>
+>>>>>>> origin/weather-api-branch
 		<string key="IBDocument.InterfaceBuilderVersion">7706</string>
 		<string key="IBDocument.AppKitVersion">1347.57</string>
 		<string key="IBDocument.HIToolboxVersion">758.70</string>
@@ -33,7 +37,11 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="774585933">
+<<<<<<< HEAD
 				<reference key="NSNextResponder"/>
+=======
+				<nil key="NSNextResponder"/>
+>>>>>>> origin/weather-api-branch
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUILabel" id="1051047451">
@@ -41,7 +49,10 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 57}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
+<<<<<<< HEAD
 						<reference key="NSWindow"/>
+=======
+>>>>>>> origin/weather-api-branch
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -52,7 +63,10 @@
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
+<<<<<<< HEAD
 							<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
+=======
+>>>>>>> origin/weather-api-branch
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
@@ -72,8 +86,11 @@
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
+<<<<<<< HEAD
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+=======
+>>>>>>> origin/weather-api-branch
 				<reference key="NSNextKeyView" ref="1051047451"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -239,6 +256,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">14</int>
 		</object>
+<<<<<<< HEAD
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
@@ -251,6 +269,9 @@
 				</object>
 			</array>
 		</object>
+=======
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+>>>>>>> origin/weather-api-branch
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">NO</bool>

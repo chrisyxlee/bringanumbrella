@@ -311,10 +311,17 @@
     [self appendCloseViewAtXIndex:&contentXIndex];
     
     NSInteger panelViewIndex = 0;
+<<<<<<< HEAD
     for (int i = Panels.count-1; i > -1; i--) {
         
         //Create a new view for the panel and add it to the array
         [panelViews addObject:[self PanelViewForPanel:Panels[i] atXIndex:&contentXIndex]];
+=======
+    for (int ii = Panels.count-1; ii > -1; ii--) {
+        
+        //Create a new view for the panel and add it to the array
+        [panelViews addObject:[self PanelViewForPanel:Panels[ii] atXIndex:&contentXIndex]];
+>>>>>>> origin/weather-api-branch
         
         //Add the newly created panel view to ContentScrollView
         [self.ContentScrollView addSubview:panelViews[panelViewIndex]];

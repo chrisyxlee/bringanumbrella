@@ -35,7 +35,7 @@
     //NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     self.longitude = self.currentLocation.coordinate.longitude;
     self.latitude = self.currentLocation.coordinate.latitude;
-    NSLog(@"Longitude: %.2f, Latitude: %.2f", self.longitude, self.latitude);
+    NSLog(@"Longitude: %f, Latitude: %f", self.longitude, self.latitude);
     [manager stopUpdatingLocation];
 }
 
