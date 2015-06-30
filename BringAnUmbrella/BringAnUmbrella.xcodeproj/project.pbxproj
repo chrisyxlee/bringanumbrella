@@ -127,7 +127,6 @@
 				AAF7FB1D1B421737008E7D6F /* Forecast.m */,
 				AAF7FAD81B41BF96008E7D6F /* ViewController.h */,
 				AAF7FAD91B41BF96008E7D6F /* ViewController.m */,
-				370F7A091B41ECE600B94064 /* ViewController.xib */,
 				AAF7FB091B41F286008E7D6F /* WeatherAPI.h */,
 				AAF7FB0A1B41F286008E7D6F /* WeatherAPI.m */,
 				AAF7FB0F1B41F448008E7D6F /* Weather.h */,
@@ -219,6 +218,11 @@
 				TargetAttributes = {
 					AAF7FACD1B41BF96008E7D6F = {
 						CreatedOnToolsVersion = 6.3.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					AAF7FAE61B41BF96008E7D6F = {
 						CreatedOnToolsVersion = 6.3.2;

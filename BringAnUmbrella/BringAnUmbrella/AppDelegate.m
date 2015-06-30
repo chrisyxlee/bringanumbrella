@@ -26,7 +26,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+    _location = [[UserLocation alloc] init];
+    
+    ForecastStore *forecastStore = [[ForecastStore alloc] init];
+    Forecast *forecast = [forecastStore forecastForTodayAt:_location];
+    
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     
@@ -35,7 +39,7 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
 
-    _location = [[UserLocation alloc] init];
+
     
     return YES;
     
