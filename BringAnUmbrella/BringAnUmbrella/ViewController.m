@@ -25,14 +25,14 @@
     [super viewDidAppear:animated];
     
     //STEP 1 Construct Panels
-    MYIntroductionPanel *panel = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"Umbrella_icon"] title:@"Bring an Umbrella" description:@"Ready to never have to worrying about remembering your umbrella an again?" ];
+    MYIntroductionPanel *panel = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"UmbrellaIcon2"] title:@"Bring an Umbrella" description:@"Ready to never have to worrying about remembering your umbrella an again?" ];
     
     //You may also add in a title for each panel
-    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"Umbrella_icon"] title:@"Enable GPS" description:@"If you don't let Bring an Umbrella Access GPS, we won't be able to predict rain in your region!"];
+    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"NewGPSIcon"] title:@"Enable GPS" description:@"If you don't let Bring an Umbrella Access GPS, we won't be able to predict rain in your region!"];
     
-    MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"Umbrella_icon"] title:@"Enable Notifications" description:@"Its literally all this app does"];
+    MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"NotificationIcon"] title:@"Enable Notifications" description:@"Its literally all this app does"];
     
-    MYIntroductionPanel *panel4 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"Umbrella_icon"] title:@"We've got you covered" description:@"Great! From now on you'll get a notification whenever percipitation is coming your way"];
+    MYIntroductionPanel *panel4 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"CoveredIcon"] title:@"We've got you covered" description:@"Great! From now on you'll get a notification whenever percipitation is coming your way"];
     
     //STEP 2 Create IntroductionView
     /*A standard version*/
@@ -42,8 +42,8 @@
     // MYIntroductionView *introductionView = [[MYIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) panels:@[panel, panel2]];
     
     /*A more customized version*/
-    MYIntroductionView *introductionView = [[MYIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) headerText:@"MYIntroductionView" panels:@[panel, panel2, panel3, panel4] languageDirection:MYLanguageDirectionLeftToRight];
-    [introductionView setBackgroundImage:[UIImage imageNamed:@"SampleBackground"]];
+    MYIntroductionView *introductionView = [[MYIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) headerText:@"Bring an Umbrella" panels:@[panel, panel2, panel3, panel4] languageDirection:MYLanguageDirectionLeftToRight];
+    [introductionView setBackgroundImage:[UIImage imageNamed:@"Background"]];
     
     /*
      MYIntroductionView *introductionView = [[MYIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) headerText:@"MYIntroductionView" panels:@[panel, panel2] languageDirection:MYLanguageDirectionLeftToRight];

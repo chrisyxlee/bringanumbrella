@@ -33,7 +33,7 @@
         //Set panel Image
         [self setupPanelContentViewWithImage:image];
         
-        self.Title = title;
+        self.Title = @"Bring an Umbrella";
         
         //Set panel Description
         self.Description = [[NSString alloc] initWithString:description];
