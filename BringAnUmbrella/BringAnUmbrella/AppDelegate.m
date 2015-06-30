@@ -24,6 +24,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     _location = [[UserLocation alloc] init];
+    _location.latitude = 35.67;
+    _location.longitude = 139.81;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -32,6 +34,18 @@
     self.viewController.location = self.location;
     [self.window makeKeyAndVisible];
     
+    
+    ForecastStore *forecastStore = [[ForecastStore alloc] init];
+    [forecastStore forecastForTodayAt:self.location];
+    
+    while (forecastStore.forecast == nil) {} //hack for waiting for the task to finish lol
+
+    if ([forecastStore.forecast tomorrowWillRain]) {
+        self.viewController.imageView.image = [UIImage imageNamed:@"rain"];
+    } else {
+        self.viewController.imageView.image = [UIImage imageNamed:@"sun"];
+    }
+    [self.viewController.view setNeedsDisplay];
     return YES;
     
 }

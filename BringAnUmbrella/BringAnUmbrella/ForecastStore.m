@@ -57,10 +57,10 @@
     return forecast;
 }
 
-- (Forecast *)forecastForTodayAt:(UserLocation *)location {
+- (void)forecastForTodayAt:(UserLocation *)location {
     NSURL *fiveDayURL = [WeatherAPI fiveDayWeatherURLForLocation:location];
     
-    __block Forecast *forecast;
+    __weak ForecastStore *weakSelf = self;
     NSURLRequest *request = [NSURLRequest requestWithURL:fiveDayURL];
     NSLog(@"%@",fiveDayURL);
     NSURLSessionDataTask *task =
@@ -69,8 +69,8 @@
                                         NSURLResponse *response,
                                         NSError *error) {
                         if (data) {
-                            forecast = [WeatherAPI forecastFromJSONData:data];
-                            
+                            Forecast *forecast = [WeatherAPI forecastFromJSONData:data];
+                            NSLog(@"blah forecast == nil %@", forecast == nil ? @"true":@"false");
                             NSLog(@"count: %lu",(unsigned long)forecast.weatherArray.count);
                             
                             //getting time for 6am next morning
@@ -98,11 +98,11 @@
 
                             }
                             NSLog(@"%lu weathers",[forecast.weatherArray count]);
+                            weakSelf.forecast = forecast;
+                            NSLog(@"weakself forecast == nil %@", forecast == nil ? @"true" : @"false");
                         } else NSLog(@"Failed to fetch data. Error: %@", error.localizedDescription);
                     }];
     [task resume];
-    return forecast;
-
 }
 
 @end

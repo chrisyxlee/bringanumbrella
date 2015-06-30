@@ -69,16 +69,7 @@
     [introductionView showInView:self.view animateDuration:0.0];
     
     //STEP 4: Determine homescreen forecast
-    ForecastStore *forecastStore = [[ForecastStore alloc] init];
-    Forecast *forecast = [forecastStore forecastForTodayAt:self.location];
-//    NSString *forecast
-    NSLog(@"forecast:  %d",[forecast tomorrowWillRain]);
-    if ([forecast tomorrowWillRain]) {
-        self.imageView.image = [UIImage imageNamed:@"rain"];
-    } else {
-        NSLog(@"ASDHGAKGJLAKWJEGAKLJAF");
-        self.imageView.image = [UIImage imageNamed:@"sun"];
-    }
+
 }
 
 - (void)didReceiveMemoryWarning

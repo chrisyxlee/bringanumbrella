@@ -76,6 +76,7 @@ NSString * const APIKey = @"3ae7ed578eb03aa2b78f2329bd28c6f5";
     } else NSLog(@"Failed to parse JSON forecast data. Error: %@", parseError.localizedDescription);
     
     Forecast *weatherForecast = [[Forecast alloc] initWithForecast:forecast];
+    NSLog(@"weatherforecast ??? %@", weatherForecast == nil ? @"true" : @"false");
     return weatherForecast;
 }
 

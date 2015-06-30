@@ -12,7 +12,9 @@
 
 @interface ForecastStore : NSObject
 
+@property (nonatomic, strong) Forecast *forecast;
+
 - (Forecast *)forecastFromFiveDayForecastAt:(UserLocation *)location;
-- (Forecast *)forecastForTodayAt:(UserLocation *)location;
+- (void)forecastForTodayAt:(UserLocation *)location;
 
 @end
