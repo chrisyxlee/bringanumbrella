@@ -10,26 +10,37 @@
 
 @implementation UserLocation
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+- (instancetype)init
 {
-    CLLocation *location = [locations lastObject];
-    NSDate *eventDate = location.timestamp;
-    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    if (fabs(howRecent) < 30.0)
+    self = [super init];
+    if (self)
     {
-        self.longitude = location.coordinate.longitude;
-        self.latitude = location.coordinate.latitude;
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        {
+            [_locationManager requestAlwaysAuthorization];
+        }
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+        [_locationManager startUpdatingLocation];
     }
+    return self;
 }
 
-- (void)startSignificantChangeUpdates
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations
 {
-    if (self.locationManager == nil)
-    {
-        self.locationManager = [[CLLocationManager alloc] init];
-    }
-    self.locationManager.delegate = self;
-    [self.locationManager startMonitoringSignificantLocationChanges];
+    self.currentLocation = [locations lastObject];
+    //NSDate *eventDate = self.currentLocation.timestamp;
+    //NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    self.longitude = self.currentLocation.coordinate.longitude;
+    self.latitude = self.currentLocation.coordinate.latitude;
+    NSLog(@"Longitude: %f, Latitude: %f", self.longitude, self.latitude);
+    [manager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"Error in finding location.");
 }
 
 @end

@@ -8,32 +8,110 @@
 
 #import "WeatherAPI.h"
 #import "UserLocation.h"
+#import "Weather.h"
+#import "Forecast.h"
 
-NSString * const BaseURLString = @"http://api.openweathermap.org/data/2.5/weather";
+NSString * const BaseURLStringWeather = @"http://api.openweathermap.org/data/2.5/weather";
+NSString * const BaseURLStringForecast = @"http://api.openweathermap.org/data/2.5/forecast";
 NSString * const APIKey = @"3ae7ed578eb03aa2b78f2329bd28c6f5";
+
+#define WEATHER     0
+#define FORECAST    1
 
 @implementation WeatherAPI
 
-+ currentWeatherURLForLocation:(UserLocation *)location {
-    NSInteger longitude = location.longitude;
-    NSInteger latitude = location.latitude;
++ (NSURL *)currentWeatherURLForLocation:(UserLocation *)location {
+    NSString *longitude = [NSString stringWithFormat:@"%d",(int)location.longitude];
+    NSString *latitude = [NSString stringWithFormat:@"%d",(int)location.latitude];
     
-    NSNumber *lon = [NSNumber numberWithInteger:longitude];
-    NSNumber *lat = [NSNumber numberWithInteger:latitude];
+    NSDictionary *params = @{ @"lon":longitude,
+                              @"lat":latitude };
     
-    NSDictionary *params = @{ @"lon":lon,
-                              @"lat":lat };
-    
-    NSURL *currentWeatherURL = [self weatherURLWithParameters:params];
+    NSURL *currentWeatherURL = [self weatherURLWithWeatherType:WEATHER
+                                                    parameters:params];
     return currentWeatherURL;
 }
 
++ (NSURL *)fiveDayWeatherURLForLocation:(UserLocation *)location {
+    NSString *longitude = [NSString stringWithFormat:@"%f",location.longitude];
+    NSString *latitude = [NSString stringWithFormat:@"%f",location.latitude];
+    
+    NSDictionary *params = @{ @"lon":longitude,
+                              @"lat":latitude };
+    
+    NSURL *forecastWeatherURL = [self weatherURLWithWeatherType:FORECAST
+                                                    parameters:params];
+    return forecastWeatherURL;
+}
+
++ (Forecast *)forecastFromJSONData:(NSData *)jsonData {
+    NSMutableArray *forecast = [NSMutableArray array];
+    
+    NSError *parseError = nil;
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&parseError];
+    
+    if (jsonObject) {
+        NSArray *list = jsonObject[@"list"];
+        for (NSDictionary *weather in list) {
+            NSString *type = [weather[@"weather"] firstObject][@"main"];
+            float temp = [weather[@"main"][@"temp"] floatValue];
+            float minTemp = [weather[@"main"][@"temp_min"] floatValue];
+            float maxTemp = [weather[@"main"][@"temp_max"] floatValue];
+            float rain = [weather[@"rain"][@"3h"] floatValue];
+            float humidity = [weather[@"main"][@"humidity"] floatValue];
+            NSInteger clouds = [weather[@"clouds"][@"all"] intValue];
+            NSDateFormatter *formatter = [WeatherAPI dateFormatter];
+            NSDate *date = [formatter dateFromString:weather[@"dt_txt"]];
+            
+            Weather *weather = [[Weather alloc] initWithType:type
+                                                 temperature:temp
+                                                 minimumTemp:minTemp
+                                                 maximumTemp:maxTemp
+                                                amountOfRain:rain
+                                                    humidity:humidity
+                                                      clouds:clouds
+                                                        date:date];
+            [forecast addObject:weather];
+        }
+    } else NSLog(@"Failed to parse JSON forecast data. Error: %@", parseError.localizedDescription);
+    
+    Forecast *weatherForecast = [[Forecast alloc] initWithForecast:forecast];
+    return weatherForecast;
+}
+
++ (NSDateFormatter *)dateFormatter {
+    static NSDateFormatter *formatter = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    });
+    
+    return formatter;
+}
+
 //private
-+ (NSURL *)weatherURLWithParameters:(NSDictionary *)params {
-    NSURLComponents *components = [NSURLComponents componentsWithString:BaseURLString];
++ (NSURL *)weatherURLWithWeatherType:(NSInteger)type
+                          parameters:(NSDictionary *)params {
+    NSURLComponents *components = nil;
+    switch(type) {
+        case WEATHER:
+            components = [NSURLComponents componentsWithString:BaseURLStringWeather];
+            break;
+        case FORECAST:
+            components = [NSURLComponents componentsWithString:BaseURLStringForecast];
+            break;
+        default:
+            break;
+    }
+    
     NSMutableArray *queryItems = [NSMutableArray array];
     
-    NSMutableDictionary *allParams = [@{ @"api_key" : APIKey } mutableCopy];
+    //currently assuming fahrenheit
+    NSMutableDictionary *allParams = [@{ @"api_key" : APIKey,
+                                         @"units" : @"imperial",
+                                         @"type" : @"accurate" } mutableCopy];
     
     [allParams addEntriesFromDictionary:params];
     
