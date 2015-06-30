@@ -77,7 +77,10 @@
     NSDate *date = [calendar dateFromComponents:components];
     
     UILocalNotification *note = [[UILocalNotification alloc] init];
-    note.alertBody = @"Bring an umbrella!";
+    NSData *data = [@"\xF0\x9F\x98\x81" dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *goodValue = [[NSString alloc] initWithData:data encoding:NSNonLossyASCIIStringEncoding];
+    note.alertBody = @"\u2614 Bring an umbrella";
+    NSLog(@"%@",note.alertBody);
     note.fireDate = date;
     [[UIApplication sharedApplication] scheduleLocalNotification:note];
 

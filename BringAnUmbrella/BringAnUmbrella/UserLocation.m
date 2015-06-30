@@ -21,6 +21,7 @@
         {
             [_locationManager requestAlwaysAuthorization];
         }
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
         [_locationManager startUpdatingLocation];
     }
     return self;
