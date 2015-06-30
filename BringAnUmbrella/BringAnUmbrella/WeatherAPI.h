@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 @class UserLocation;
+@class Forecast;
 
 @interface WeatherAPI : NSObject
 
 + (NSURL *)currentWeatherURLForLocation:(UserLocation *)location;
++ (NSURL *)fiveDayWeatherURLForLocation:(UserLocation *)location;
++ (Forecast *)forecastFromJSONData:(NSData *)jsonData;
 
 @end

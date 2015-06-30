@@ -8,8 +8,12 @@
 
 #import "AppDelegate.h"
 #import "UserLocation.h"
-
+#import "WeatherAPI.h"
 #import "ViewController.h"
+#import "ForecastStore.h"
+#import "Weather.h"
+#import "Forecast.h"
+
 
 @interface AppDelegate ()
 @property (nonatomic, strong) UserLocation *location;
@@ -24,6 +28,7 @@
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    _location = [[UserLocation alloc] init];
     
     return YES;
     

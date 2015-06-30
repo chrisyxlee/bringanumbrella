@@ -9,6 +9,7 @@
 #import "WeatherAPI.h"
 #import "UserLocation.h"
 #import "Weather.h"
+#import "Forecast.h"
 
 NSString * const BaseURLStringWeather = @"http://api.openweathermap.org/data/2.5/weather";
 NSString * const BaseURLStringForecast = @"http://api.openweathermap.org/data/2.5/forecast";
@@ -31,27 +32,48 @@ NSString * const APIKey = @"3ae7ed578eb03aa2b78f2329bd28c6f5";
     return currentWeatherURL;
 }
 
-+ (Weather *)weatherFromJSON:(NSDictionary *)jsonDict {
-    NSString *type = jsonDict[@"weather"][@"main"];
-    CGFloat temp = [jsonDict[@"main"][@"temp"] floatValue];
-    NSInteger humidity = [jsonDict[@"main"][@"humidity"] intValue];
-    NSInteger minTemp = [jsonDict[@"main"][@"temp_min"] intValue];
-    NSInteger maxTemp = [jsonDict[@"main"][@"temp_max"] intValue];
-    NSInteger rain = 0.0;
-    if (jsonDict[@"rain"]) rain = [jsonDict[@"main"][@"3h"] intValue];
-    NSInteger clouds = 0;
-    if (jsonDict[@"clouds"]) clouds = [jsonDict[@"clouds"][@"all"] intValue];
++ (NSURL *)fiveDayWeatherURLForLocation:(UserLocation *)location {
+    NSString *longitude = [NSString stringWithFormat:@"%d",(int)location.longitude];
+    NSString *latitude = [NSString stringWithFormat:@"%d",(int)location.latitude];
     
-    if (!(type || temp || humidity || minTemp || maxTemp)) return nil;
+    NSDictionary *params = @{ @"lon":longitude,
+                              @"lat":latitude };
     
-    Weather *weather = [[Weather alloc] initWithType:type
-                                         temperature:temp
-                                         minimumTemp:minTemp
-                                         maximumTemp:maxTemp
-                                        amountOfRain:rain
-                                            humidity:humidity
-                                              clouds:clouds];
-    return weather;
+    NSURL *forecastWeatherURL = [self weatherURLWithWeatherType:FORECAST
+                                                    parameters:params];
+    return forecastWeatherURL;
+}
+
++ (Forecast *)forecastFromJSONData:(NSData *)jsonData {
+    NSMutableArray *forecast = [NSMutableArray array];
+    
+    NSError *parseError = nil;
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&parseError];
+    
+    if (jsonObject) {
+        NSArray *list = jsonObject[@"list"];
+        for (NSDictionary *weather in list) {
+            NSString *type = [weather[@"weather"] firstObject][@"main"];
+            float temp = [weather[@"main"][@"temp"] floatValue];
+            float minTemp = [weather[@"main"][@"temp_min"] floatValue];
+            float maxTemp = [weather[@"main"][@"temp_max"] floatValue];
+            float rain = [weather[@"rain"][@"3h"] floatValue];
+            float humidity = [weather[@"main"][@"humidity"] floatValue];
+            NSInteger clouds = [weather[@"clouds"][@"all"] intValue];
+            
+            Weather *weather = [[Weather alloc] initWithType:type
+                                                 temperature:temp
+                                                 minimumTemp:minTemp
+                                                 maximumTemp:maxTemp
+                                                amountOfRain:rain
+                                                    humidity:humidity
+                                                      clouds:clouds];
+            [forecast addObject:weather];
+        }
+    } else NSLog(@"Failed to parse JSON forecast data. Error: %@", parseError.localizedDescription);
+    
+    Forecast *weatherForecast = [[Forecast alloc] initWithForecast:forecast];
+    return weatherForecast;
 }
 
 //private
@@ -73,7 +95,7 @@ NSString * const APIKey = @"3ae7ed578eb03aa2b78f2329bd28c6f5";
     
     //currently assuming fahrenheit
     NSMutableDictionary *allParams = [@{ @"api_key" : APIKey,
-                                         @"metric" : @"imperial",
+                                         @"units" : @"imperial",
                                          @"type" : @"accurate" } mutableCopy];
     
     [allParams addEntriesFromDictionary:params];
